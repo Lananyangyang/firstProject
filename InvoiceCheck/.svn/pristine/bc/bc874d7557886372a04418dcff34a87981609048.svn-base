@@ -1,0 +1,201 @@
+package com.rhxt.ic.controller;
+
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.Md5Crypt;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.mysql.fabric.xmlrpc.base.Value;
+import com.rhxt.ic.generic.GenericController;
+import com.rhxt.ic.user.model.TLoginUser;
+import com.rhxt.ic.user.service.ITLoginUserService;
+
+import io.netty.handler.codec.base64.Base64Encoder;
+import oracle.net.aso.MD5;
+
+/**
+ * 
+ *
+ * @ClassName: UserController
+ * @Description: TODO
+ * @author gaowang
+ * @date 2018年6月13日 上午11:30:16
+ *
+ */
+@Controller
+@RequestMapping(value = "/user")
+public class UserController extends GenericController
+{
+
+	@Resource
+	private ITLoginUserService tLoginUserService;
+
+	
+	@RequestMapping(value="/login")
+	public ModelAndView login( TLoginUser user){
+		ModelAndView model = new ModelAndView();
+		 String referer=request.getHeader("Referer");
+		 if(referer ==null){
+			 model.setViewName("redirect:/index.jsp");
+		 }else{
+			String path = request.getContextPath();
+			Object log = session.getAttribute("userInfo");
+	 		if(log != null){
+	 			model.setViewName("main");
+			
+		}
+		String name = user.getLoginName();
+		String password = user.getPassword();
+		byte[] b = Base64.encodeBase64(password.getBytes(), true);    
+        password = new String(b).replaceAll("\r|\n", "");; //MTIzNDU2   
+		List<TLoginUser> list = tLoginUserService.selectByLoginNameAndPassword(name, password);
+		
+		if(list.size()>0){
+			session.setAttribute("userInfo", list.get(0));
+			model.setViewName("main");
+		}else{
+			model.addObject("message", "账号或密码错误");
+			model.setViewName("redirect:/index.jsp");
+			
+		}
+		 }
+		return model;
+	}
+	
+	
+	
+	@RequestMapping(value="/logout",method=RequestMethod.POST)
+	public String logout(HttpSession session){
+		String returnUrl = "redirect:/";
+		session.removeAttribute("userInfo");
+		return returnUrl;
+		
+		
+	}
+	@RequestMapping(value="/queryUser")
+	@ResponseBody
+	public List<TLoginUser> queryUser(ModelAndView model){
+		model.setViewName("main");
+		List<TLoginUser> info = tLoginUserService.selectByExample();
+		
+		PageInfo<TLoginUser> pageInfo = new PageInfo<>(info);
+		System.out.println(info);
+		session.setAttribute("pageHelper", pageInfo);
+		return info;
+		
+	}
+	
+	@RequestMapping(value="/queryUserById",method=RequestMethod.POST)
+	@ResponseBody
+	public  TLoginUser queryUser(TLoginUser user){
+		TLoginUser tLoginUser = tLoginUserService.selectById(user.getId());
+		return tLoginUser;
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/insertUser")
+	public void insertUser(TLoginUser user,Model model){
+		
+		List<TLoginUser> list = tLoginUserService.selectByLoginName(user.getLoginName());
+		if(list.size()>0){
+			
+			try {
+				response.getWriter().write("2");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return ;
+		}
+		
+//		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+		String password = user.getPassword();
+		byte[] b = Base64.encodeBase64(password.getBytes(), true);    
+        password = new String(b); 
+        user.setPassword(password);
+		user.setId(UUID.randomUUID().toString());
+		user.setUserType((short)0);
+		user.setFillDate(new Date());
+		int i = tLoginUserService.insert(user);
+		if(i>0){
+			try {
+				response.getWriter().write("1");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@RequestMapping(value="/deleteUser")
+	public void deleteUser(TLoginUser user){
+		int i = tLoginUserService.delete(user.getId());
+		if(i>0){
+			try {
+				response.getWriter().write("删除成功");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				response.getWriter().write("删除失败");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	
+//	updateByPrimaryKey
+//	更改用户
+	@RequestMapping(value="/updateUser")
+	public void updateByPrimaryKey(TLoginUser user){
+		List<TLoginUser> list = tLoginUserService.selectByLoginName(user.getLoginName());
+		if(list.size()>0){
+			String id = list.get(0).getId();
+			if(!user.getId().equals(id)){
+				try {
+					response.getWriter().write("2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return ;
+			}
+			
+		}
+		int i = tLoginUserService.updateByPrimaryKey(user);
+		if(i>0){
+			try {
+				response.getWriter().write("1");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+}

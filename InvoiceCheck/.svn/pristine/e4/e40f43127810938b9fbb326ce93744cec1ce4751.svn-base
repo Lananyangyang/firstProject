@@ -1,0 +1,574 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%  
+String path = request.getContextPath();  
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%>  
+<base href="<%=basePath%>"> 
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>电子发票核查系统</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<script>
+			
+			//if(!localStorage.userName) alert(2)
+			
+		</script>
+	</head>
+	<body>
+		<header>
+			<div class="headerInner">
+				<div class="logo"></div>
+				<div class="title">北京润华信通发票核实系统</div>
+				<div class="userName">当前用户</br><span>${sessionScope.userInfo.loginName }</span></div>
+			</div>
+		</header>
+		<div class="main">
+			<nav>
+				<ul id="nav">
+					<li data-fn="Enter">发票信息录入</li>
+					<li data-fn="Search">发票信息查询</li>
+					<li data-fn="Gather">发票信息汇总</li>
+					<li data-fn="Manage">用户管理</li>
+				</ul>
+			</nav>
+			<div id="contentBox" class="contentBox">
+				<div class="content">
+					<div class="tabs">
+						<ul id="tabsList">
+							<li data-fn="Enter" class="focus">发票信息录入</li>
+						</ul>
+					</div>
+					<div id="Module">
+						<div id="Enter" class="module">
+							<div class="inner">
+								<div class="enterInfo">
+									<div class="QRcode block">
+										<div class="number">
+											<p>输入OA流水号</p>
+											<input type="text" />
+										</div>
+										<div class="QRcodeContent"></div>
+									</div>
+									<ul class="infoList block">
+										<li>
+												<div><p>发票代码</p></div>
+												<input type="text" name="scanningInfo" disabled />
+										</li>
+										<li>
+												<div><p>发票号</p></div>
+												<input type="text" name="scanningInfo" disabled />
+										</li>
+										<li>
+												<div><p>开票日期</p></div>
+												<input type="text" name="scanningInfo" disabled />
+										</li>
+									</ul>
+								</div>
+							
+								<div class="btn clearfix">
+									<div class="clear">
+										<input id="ClearScanningInfo" type="button" value="清空扫描信息" />
+									</div>
+									<div class="hand">
+										<input id="handEnter" type="button" value="无法输入，转入手工输入" />
+									</div>
+								</div>
+								
+								<div class="infoTable block">
+									
+								</div>
+							</div>
+							<div id="handInner">
+								<ul id="handEnterInfo" class="clearfix">
+									<li>
+										<p>OA流水号</p>
+										<input class="cm_handConfirm" type="text" />
+									</li>
+									<li>
+										<p>发票代码</p>
+										<input class="cm_handConfirm" type="text" />
+									</li>
+									<li>
+										<p>发票号</p>
+										<input class="cm_handConfirm" type="text" />
+									</li>
+									<li>
+										<p>开票日期</p>
+										<a class="input-group date" id='HandDateTimePicker1'>
+							                <input name="handConfirm" type="text" class="form-control cm_handConfirm" id="nowdate"  />
+							                <span class="input-group-addon">
+							                    <span class="glyphicon glyphicon-calendar"></span>
+							                </span>
+							            </a>
+									</li>
+									<li>
+										<p>校验码</p>
+										<input class="cm_handConfirm" type="text" />
+									</li>
+									<li>
+										<p>税价合计</p>
+										<input class="cm_handConfirm" type="text" />
+									</li>
+									<li>
+										<p>录入人</p>
+										<input class="cm_handConfirm" type="text" />
+									</li>
+									<li>
+										<p>录入日期</p>
+										<a class="input-group date" id='HandDateTimePicker2'>
+							                <input name="handConfirm" type="text" class="form-control cm_handConfirm" id="nowdate"  />
+							                <span class="input-group-addon">
+							                    <span class="glyphicon glyphicon-calendar"></span>
+							                </span>
+							            </a>
+									</li>
+								</ul>
+								<section>
+									<p>新增发票明细</p>
+									<textarea id="BillDetail" placeholder="项目名称、单位、数量、单价、金额、税率、税额"></textarea>
+									<div>
+										<input type="button" id="HandCancel" value="取消" />
+										<input type="button" id="HandSubBtn" value="保存" />
+									</div>
+								</section>
+							</div>
+						</div>
+						<div id="Search" class="module">
+							<div class="inner">
+								<div class="search clearfix">
+									<ul>
+										<li>
+											<p>OA流水号</p>
+											<input type="text" />
+										</li>
+										<li>
+											<p>发票代码</p>
+											<input type="text" />
+										</li>
+										<li>
+											<p>发票号码</p>
+											<input type="text" />
+										</li>
+									</ul>
+									<input type="button" id="" value="查询" />
+								</div>
+								<div class="block result">
+									
+								</div>
+							</div>
+						</div>
+						<div id="Gather" class="module">
+							<div class="inner">
+								<table class="table" cellspacing="0" cellpadding="0">
+									<thead>
+										<tr>
+											<th width="50%">OA流水号</th>
+											<th width="25%">电子发票数量</th>
+											<th width="25%">金额</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>asd</td>
+											<td>asd</td>
+											<td>asd</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div id="Manage" class="module">
+							<div class="inner">
+								<div id="AdminUser">
+									<div class="edit clearfix">
+									<form method="post" id="insertForm">
+										<input name="fillUserId" hidden="ture" type="text" value=${sessionScope.userInfo.id}></input>
+										
+										<ul class="clearfix editList">
+											<li>
+												<p>用户登录名</p>
+												<input class="cm_userManage" name="loginName" type="text" id="UserNameByAdmin" />
+											</li>
+											<li>
+												<p>密码</p>
+												<input class="cm_userManage" name="password" type="text" id="PassWordByAdmin" />
+											</li>
+											<li>
+												<p>姓名</p>
+												<input class="cm_userManage" name="name" type="text" id="NameByAdmin" />
+											</li>
+											
+										</ul>
+										<input name="id" hidden="ture" class="cm_userManage" type="text" ></input>
+										</form>
+										<ul class="clearfix editBtn">
+											<li><input type="button" name="add" value="新增" id="AddByAdmin" /></li>
+											<li><input type="button" name="change" value="保存修改" id="ChangeByAdmin" /></li>
+											<li><input type="button" name="del" value="删除" id="DelByAdmin" /></li>
+										</ul>
+									</div>
+									<table class="table" cellspacing="0" cellpadding="0">
+										<thead>
+											<tr>
+												<th></th>
+												<th>用户登录名</th>
+												<th>用户密码</th>
+												<th>用户姓名</th>
+											</tr>
+										</thead>
+										<tbody id="UserList"></tbody>
+									</table>
+								</div>
+								<div id="NormalUser">
+									<div class="inner">
+										<ul>
+											<li>
+												<p>用户登陆名</p>
+												<input type="text" name="normalUserInfo" id="UserNameByNormal" />
+											</li>
+											<li>
+												<p>用户密码</p>
+												<input type="password" name="normalUserInfo" id="PassWordByNormal" />
+											</li>
+											<li>
+												<p>用户姓名</p>
+												<input type="text" name="normalUserInfo" id="NameByNormal" />
+											</li>
+										</ul>
+										<div class="btn">
+											<input type="button" value="保存" id="SubByNormal" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		  
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>  
+		<script type="text/javascript" src="js/moment-with-locales.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+		<script>
+			
+			//要删除的
+			localStorage.userType="admin"
+			
+			var newUserName="";
+			
+			window.onload=function(){
+				resize();
+				initPage();
+			}
+			window.onresize=resize
+			
+			function resize(){
+				document.body.style.height=window.innerHeight+"px";
+				if((window.innerHeight*0.93-60)>500&&(window.innerHeight*0.93-60)<1000){
+					contentBox.style.height=window.innerHeight*0.93-60+"px"
+				}
+			}
+			function initPage () {
+				//左侧导航添加点击事件
+				nav.onclick=navCut;
+				//右侧tab页签添加点击事件
+				tabsList.onclick=tabCut;
+				
+				/**************信息录入相关**************/
+				//清空扫描信息
+				ClearScanningInfo.onclick=function(){
+					clearValue("scanningInfo")
+				}
+				//显示手工录入
+				handEnter.onclick=function(){
+					initDateTime(["#HandDateTimePicker1","#HandDateTimePicker2"]);
+					handInner.style.right=0;
+				}
+				//手工信息录入提交
+				HandSubBtn.onclick=subHandEnterInfo;
+				//手工信息录入取消
+				HandCancel.onclick=function(){
+					clearValue("handConfirm");
+				}
+				
+				/**************发票信息汇总相关**************/
+				infoSearch();
+				
+				/**************发票信息汇总相关**************/
+				gatherUpData();
+				
+				/**************用户管理相关**************/
+				//用户类型判断
+				userType();
+				
+				
+			}
+			var navItem=nav.children;
+			var module=document.querySelectorAll(".module");
+			
+			function userType () {
+				if(localStorage.userType){
+					if(localStorage.userType=="admin"){
+						NormalUser.parentNode.removeChild(NormalUser);
+						//初始化列表
+						queryUser();
+						//管理员添加用户
+						AddByAdmin.onclick=userAdd;
+						//管理员修改用户
+						ChangeByAdmin.onclick=userChange;
+						//管理员删除用户
+						DelByAdmin.onclick=userDel;
+						//初始化用户列表
+						/* ajax("",{},(data)=>{
+							var obj=JSON.parse(data);
+						}) */
+					}else{
+						//普通用户提交信息
+						SubByNormal.onclick=normalUserSub;
+						AdminUser.parentNode.removeChild(AdminUser);
+					}
+				}
+			}
+			
+			function navCut () {
+				var ele=window.event.target||window.event.srcElement;
+				if(ele.tagName=="LI"){
+					var tabItem=tabsList.children;
+					var moduleDataArr=[]
+					for(var i=0;i<tabItem.length;i++){
+						moduleDataArr[i]=tabItem[i].getAttribute("data-fn");
+					}
+					if(moduleDataArr.indexOf(ele.getAttribute("data-fn"))==-1){
+						var li=document.createElement("li");
+						li.setAttribute("data-fn",ele.getAttribute("data-fn"));
+						li.className="focus";
+						li.innerHTML=ele.innerHTML;
+						tabCut(ele.getAttribute("data-fn"));
+						tabsList.appendChild(li);
+					}else{
+						tabCut(ele.getAttribute("data-fn"));
+					}
+					for(var i=0;i<nav.children.length;i++){
+						nav.children[i].className=""
+					}
+					ele.className="focus";
+				}
+			}
+			
+			function tabCut(f){
+				//控制模块显示与隐藏
+				var tabItem=tabsList.children;
+				for(var i=0;i<module.length;i++){
+					module[i].style.display="none"
+				}
+				if(typeof f=="string"){
+					document.getElementById(f).style.display="block";
+					for(var i=0;i<tabItem.length;i++){
+						tabItem[i].className=(tabItem[i].getAttribute("data-fn")==f)?"focus":""
+					}
+				}else{
+					var ele=window.event.target||window.event.srcElement;
+					document.getElementById(ele.getAttribute("data-fn")).style.display="block";
+					for(var i=0;i<tabItem.length;i++){
+						tabItem[i].className=(tabItem[i].getAttribute("data-fn")==ele.getAttribute("data-fn"))?"focus":""
+					}
+				}
+			}
+			
+			function subHandEnterInfo () {
+				if(confirmation(".cm_handConfirm")){
+					alert("保存成功");
+					handInner.style.right="-100%";
+				}
+				
+			}
+			
+			
+			function clearValue (name) {
+				var ele=$(name);
+				for(var i=0;i<ele.length;i++){
+					ele[i].value=""
+				}
+				if(name==".cm_handConfirm") handInner.style.right="-100%"
+			}
+			
+			function confirmation (name) {
+				var b=true;
+				var itemList=$(name);
+				for(var i=0;i<itemList.length;i++){
+					if(itemList[i].value==""){
+						itemList[i].style.background="pink";
+						b=false
+					}else{
+						itemList[i].style.background="#fff";
+					}
+				}
+				return b
+			}
+			
+			function initDateTime (arr) {
+				for(var i=0;i<arr.length;i++){
+					Datetime(arr[i])
+				}
+			}
+			
+			function infoSearch (oa) {
+				var req={};
+				req.oa=oa;
+				/* ajax("",req,(data)=>{
+					//发票信息查询列表初始化
+					var obj=JSON.parse(data);
+				}) */
+			}
+			
+			function gatherUpData () {
+				/* ajax("",{},(data)=>{
+					//初始发票信息汇总列表
+					var obj=JSON.parse(data);
+					
+				}) */
+			}
+			
+			function checkItem (ele) {
+				var index=0;
+				var ipt=$(".cm_userManage")
+				var obj=JSON.parse(ele.getAttribute("data-info"))
+				for(var i in obj){
+					ipt[index].value=obj[i];
+					index++
+				}
+			}
+			
+			function userDel () {
+				if(UserNameByAdmin.value==""){
+					UserNameByAdmin.style.background="pink";
+					return false
+				}else{
+					UserNameByAdmin.style.background="#fff";
+				}
+				var req={};
+				req.userName=UserNameByAdmin.value;
+				ajax("",req,function(data){
+					
+				})
+			}
+			
+			function userChange () {
+				confirmation("userManage");
+				
+				$.ajax({
+					 url:"rest/user/updateUser", 
+					 data:$("#insertForm").serialize(),
+					 success:function(data){
+						if(data=="1"){
+							alert("添加成功");
+							queryUser();
+						}	
+						if(data=="2"){
+							alert("用户名重复");
+						}	
+						
+					}
+			});
+			}
+			
+			function userAdd () {
+				if(confirmation(".cm_userManage")){
+					$.ajax({
+						 url:"rest/user/insertUser", 
+						 data:$("#insertForm").serialize(),
+						 success:function(data){
+							if(data=="1"){
+								alert("添加成功");
+								queryUser();
+							}	
+							if(data=="2"){
+								alert("用户名重复");
+							}	
+							
+						}
+					});
+				}
+				
+				
+				
+				
+			}
+			function queryUser(){
+				var option="";
+				$.ajax({
+					 url:"rest/user/queryUser", 
+					 dataType : "json",
+					 success:function(data){
+						 if(data.length>0){
+							for(var i=0;i<data.length;i++){
+								var obj={"userName":data[i].loginName,"password":data[i].password,"name":data[i].name,"id":data[i].id};
+								//UserList.appendChild("<tr><td>"+data[i].loginName+"</td><td>"+data[i].password+"</td><td>"+data[i].name+"</td></tr>")
+								$("#UserList").append("<tr><td><input type='radio' name='check' onclick='checkItem(this)' data-info='"+JSON.stringify(obj)+"'></td><td>"+data[i].loginName+"</td><td>"+data[i].password+"</td><td>"+data[i].name+"</td><td style='display:none'>"+data[i].id+"</td></tr>")
+							}
+						} 
+						console.log(data)
+					}
+			});
+				
+				
+				
+				
+				
+			}
+			
+			function normalUserSub () {
+				confirmation("normalUserInfo");
+				var req={};
+				req.userName=UserNameByNormal.value;
+				req.passWord=PassWordByNormal.value;
+				req.name=NameByNormal.value;
+				ajax("",req,function(data){
+					
+				})
+			}
+			
+			//设置日期时间控件
+			function Datetime(dom) {
+			    $(dom).datetimepicker({
+			        language: 'zh-CN',//显示中文
+			        format: 'yyyy-mm-dd',//显示格式
+			        minView: "month",//设置只显示到月份
+			        initialDate: new Date(),
+			        autoclose: true,//选中自动关闭
+			        todayBtn: true,//显示今日按钮
+			        locale: moment.locale('zh-cn')
+			    });
+			    //默认获取当前日期
+			    var today = new Date();
+			    var nowdate = (today.getFullYear()) + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+			    //对日期格式进行处理
+			    var date = new Date(nowdate);
+			    var mon = date.getMonth() + 1;
+			    var day = date.getDate();
+			    var mydate = date.getFullYear() + "-" + (mon < 10 ? "0" + mon : mon) + "-" + (day < 10 ? "0" + day : day);
+			    /*document.getElementById("nowdate").value = mydate;*/
+			    if($.inArray(dom,["#HandDateTimePicker2"])!=-1) $(dom).find("input").val(mydate)
+			}
+			
+			function ajax (url,obj,fn) {
+				var xhr=new XMLHttpRequest();
+				xhr.open("post",url); 
+				xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				var req=obj?obj:{};
+				req.userName=localStorage.unserName;
+				xhr.send(req);
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200) fn(req.responseText);
+				}
+			}
+		</script>
+	</body>
+</html>

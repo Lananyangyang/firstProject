@@ -1,0 +1,15 @@
+drive.class.path=C:\\Users\\gaowang\\.m2\\repository\\jdbc\\jdbc\\10.2.0.2.0\\jdbc-10.2.0.2.0.jar
+
+##JDBC Global Setting
+jdbc.driver=oracle.jdbc.OracleDriver
+jdbc.url=jdbc:oracle:thin:@192.168.4.30:1521:ncsl
+jdbc.username=invoice
+jdbc.password=invoice
+
+model.package=com.rhxt.ic.invoice.model
+dao.package=com.rhxt.ic.invoice.dao
+xml.mapper.package=com.rhxt.ic.invoice.dao
+
+target.project=src/main/java
+
+tablename=t_invoice

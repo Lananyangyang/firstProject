@@ -1,0 +1,50 @@
+/**
+ * 
+ */
+package com.rhxt.ic.invoice.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.rhxt.ic.generic.GenericDao;
+import com.rhxt.ic.generic.GenericServiceImpl;
+import com.rhxt.ic.invoice.dao.TInvoiceMapper;
+import com.rhxt.ic.invoice.model.TInvoice;
+import com.rhxt.ic.invoice.model.TInvoiceExample;
+import com.rhxt.ic.invoice.service.ITInvoiceService;
+
+/**
+ *
+ * @ClassName: TInvoiceServiceImpl
+ * @Description: TODO
+ * @author gaowang
+ * @date 2018年6月13日 上午11:27:02
+ *
+ */
+@Service
+public class TInvoiceServiceImpl extends GenericServiceImpl<TInvoice, String> implements ITInvoiceService
+{
+
+	@Resource
+	private TInvoiceMapper tInvoiceMapper;
+
+	@Override
+	public GenericDao<TInvoice, String> getDao()
+	{
+		return tInvoiceMapper;
+	}
+
+	@Override
+	public List<TInvoice> selectByExample() {
+		TInvoiceExample example = new TInvoiceExample();
+		List<TInvoice> list = tInvoiceMapper.selectByExample(example);
+		return list;
+	}
+
+
+	
+	
+}

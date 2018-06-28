@@ -1,0 +1,148 @@
+package com.rhxt.ic.controller;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.mysql.fabric.xmlrpc.base.Value;
+import com.rhxt.ic.generic.GenericController;
+import com.rhxt.ic.user.model.TLoginUser;
+import com.rhxt.ic.user.service.ITLoginUserService;
+
+/**
+ * 
+ *
+ * @ClassName: UserController
+ * @Description: TODO
+ * @author gaowang
+ * @date 2018年6月13日 上午11:30:16
+ *
+ */
+@Controller
+@RequestMapping(value = "/user")
+public class UserController extends GenericController
+{
+
+	@Resource
+	private ITLoginUserService tLoginUserService;
+
+	
+	@RequestMapping(value="/login")
+	public ModelAndView login( TLoginUser user){
+		ModelAndView model = new ModelAndView();
+		
+		String path = request.getContextPath();
+		System.out.println(path);
+		Object log = session.getAttribute("userInfo");
+ 		if(log != null){
+ 			model.setViewName("main");
+			
+		}
+		String name = user.getLoginName();
+		String password = user.getPassword();
+		List<TLoginUser> list = tLoginUserService.selectByLoginNameAndPassword(name, password);
+		
+		
+		if(list.size()>0){
+			session.setAttribute("userInfo", list.get(0));
+			model.setViewName("main");
+		}else{
+			model.addObject("message", "账号或密码错误");
+			model.setViewName("forward:/index.jsp");
+			
+		}
+		
+		return model;
+	}
+	
+	
+	
+	@RequestMapping(value="/logout",method=RequestMethod.POST)
+	public String logout(HttpSession session){
+		String returnUrl = "redirect:/";
+		session.removeAttribute("userInfo");
+		return returnUrl;
+		
+		
+	}
+	@RequestMapping(value="/queryUser")
+	@ResponseBody
+	public List<TLoginUser>  queryUser(){
+		List<TLoginUser> list = tLoginUserService.selectByExample();
+		return list;
+		
+	}
+	
+	@RequestMapping(value="/queryUserById",method=RequestMethod.POST)
+	@ResponseBody
+	public String  queryUser(TLoginUser user){
+		TLoginUser tLoginUser = tLoginUserService.selectById(user.getId());
+		return "";
+		
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/insertUser")
+	public void insertUser(TLoginUser user,Model model){
+		
+		List<TLoginUser> list = tLoginUserService.selectByLoginName(user.getLoginName());
+		if(list.size()>0){
+			
+			try {
+				response.getWriter().write("2");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return ;
+		}
+		
+		user.setId(UUID.randomUUID().toString());
+		user.setUserType((short)0);
+		user.setFillDate(new Date());
+		int i = tLoginUserService.insert(user);
+		if(i>0){
+			try {
+				response.getWriter().write("1");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@RequestMapping(value="/deleteUser",method=RequestMethod.POST)
+	public ModelAndView deleteUser(TLoginUser user,ModelAndView model){
+		model.setViewName("");
+		int i = tLoginUserService.delete(user.getId());
+		if(i>0){
+			model.addObject("message", "删除成功");
+		}else{
+			model.addObject("message", "删除失败");
+		}
+		
+		return model;
+		
+	}
+	
+	
+	
+	
+	
+}

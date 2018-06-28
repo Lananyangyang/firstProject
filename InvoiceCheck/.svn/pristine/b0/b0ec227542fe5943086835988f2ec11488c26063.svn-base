@@ -1,0 +1,82 @@
+/**
+ * 
+ */
+package com.rhxt.ic.user.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+
+import com.rhxt.ic.generic.GenericDao;
+import com.rhxt.ic.generic.GenericServiceImpl;
+import com.rhxt.ic.user.dao.TLoginUserMapper;
+import com.rhxt.ic.user.model.TLoginUser;
+import com.rhxt.ic.user.model.TLoginUserExample;
+import com.rhxt.ic.user.model.TLoginUserExample.Criteria;
+import com.rhxt.ic.user.service.ITLoginUserService;
+
+/**
+ *
+ * @ClassName: TLoginUserServiceImpl
+ * @Description: TODO
+ * @author gaowang
+ * @date 2018年6月13日 上午11:27:55
+ *
+ */
+@Service
+public class TLoginUserServiceImpl extends GenericServiceImpl<TLoginUser, String> implements ITLoginUserService
+{
+
+	@Resource
+	private TLoginUserMapper tLoginUserMapper;
+
+	@Override
+	public GenericDao<TLoginUser, String> getDao()
+	{
+		return tLoginUserMapper;
+	}
+
+	@Override
+	public List<TLoginUser> selectByExample() {
+		TLoginUserExample example = new TLoginUserExample();
+		
+		List<TLoginUser> list = tLoginUserMapper.selectByExample(example);
+		return list;
+	}
+
+	@Override
+	public List<TLoginUser> selectByLoginNameAndPassword(String name, String password) {
+		
+		TLoginUserExample example = new TLoginUserExample();
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.isNotEmpty(name)){
+			
+			criteria.andLoginNameEqualTo(name);
+		}
+		if(StringUtils.isNotEmpty(password)){
+			
+			criteria.andLoginNameEqualTo(password);
+		}
+		List<TLoginUser> list = tLoginUserMapper.selectByExample(example);
+		
+		return list;
+	}
+
+	@Override
+	public List<TLoginUser> selectByLoginName(String loginName) {
+		TLoginUserExample example = new TLoginUserExample();
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.isNotEmpty(loginName)){
+			
+			criteria.andLoginNameEqualTo(loginName);
+		}
+		List<TLoginUser> list = tLoginUserMapper.selectByExample(example);
+		return list;
+	}
+
+	
+
+}

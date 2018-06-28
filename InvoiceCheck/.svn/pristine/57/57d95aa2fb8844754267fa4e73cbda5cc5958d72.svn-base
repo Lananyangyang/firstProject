@@ -1,0 +1,100 @@
+/**
+ * 
+ */
+package com.rhxt.ic.invoice.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+
+import com.rhxt.ic.generic.GenericDao;
+import com.rhxt.ic.generic.GenericServiceImpl;
+import com.rhxt.ic.invoice.dao.TInvoiceMapper;
+import com.rhxt.ic.invoice.model.TInvoice;
+import com.rhxt.ic.invoice.model.TInvoiceExample;
+import com.rhxt.ic.invoice.model.TInvoiceExample.Criteria;
+import com.rhxt.ic.invoice.service.ITInvoiceService;
+
+/**
+ *
+ * @ClassName: TInvoiceServiceImpl
+ * @Description: TODO
+ * @author gaowang
+ * @date 2018年6月13日 上午11:27:02
+ *
+ */
+@Service
+public class TInvoiceServiceImpl extends GenericServiceImpl<TInvoice, String> implements ITInvoiceService
+{
+
+	@Resource
+	private TInvoiceMapper tInvoiceMapper;
+
+	@Override
+	public GenericDao<TInvoice, String> getDao()
+	{
+		return tInvoiceMapper;
+	}
+
+	@Override
+	public List<TInvoice> selectByExample() {
+		TInvoiceExample example = new TInvoiceExample();
+		List<TInvoice> list = tInvoiceMapper.selectByExample(example);
+		return list;
+	}
+
+	@Override
+	public List<TInvoice> selectByOaId(String oaId) {
+		TInvoiceExample example = new TInvoiceExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andOaIdEqualTo(oaId);
+		List<TInvoice> list = tInvoiceMapper.selectByExample(example);
+		return list;
+		
+	}
+
+	@Override
+	public List<TInvoice> checkByIdAndCode(String id,String code) {
+		TInvoiceExample example = new TInvoiceExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andIdEqualTo(id);
+		criteria.andCodeEqualTo("code");
+		List<TInvoice> list = tInvoiceMapper.selectByExample(example);
+		return list;
+		
+		
+		
+	}
+
+	@Override
+	public List<TInvoice> selectByIdOrOaIdOrCode(String oaId, String id, String code) {
+		TInvoiceExample example = new TInvoiceExample();
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.isNotEmpty(oaId)){
+			criteria.andOaIdEqualTo(oaId);
+		}
+		if(StringUtils.isNotEmpty(id)){
+			criteria.andIdEqualTo(id);
+		}
+		if(StringUtils.isNotEmpty(code)){
+			criteria.andCodeEqualTo(code);
+		}
+		List<TInvoice> list = tInvoiceMapper.selectByExample(example);
+		return list;
+	}
+
+	@Override
+	public List<TInvoice> countInvoiceByDesc() {
+		TInvoiceExample example = new TInvoiceExample();
+		example.setOrderByClause(" oaId Desc ");
+		List<TInvoice> list = tInvoiceMapper.selectByExample(example);
+		return list;
+	}
+
+
+	
+	
+}

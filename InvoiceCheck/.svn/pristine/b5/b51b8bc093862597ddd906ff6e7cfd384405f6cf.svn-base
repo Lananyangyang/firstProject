@@ -1,0 +1,131 @@
+*{margin:0 auto;padding:0}
+body{min-width:1000px;font-size:14px;font-family: "arial, helvetica, sans-serif";line-height: 1.5em;text-align: center;background: linear-gradient(#1888de,#54b5ff);background: -moz-linear-gradient(#1888de,#54b5ff);background: -webkit-linear-gradient(#1888de,#54b5ff);background: -ms-linear-gradient(#1888de,#54b5ff);}
+img{display: block;}
+p{margin:0 auto}
+a{color:inherit;text-decoration:none;cursor:pointer;}
+.table{border-top:1px #0A61B9 solid;border-left:1px #0A61B9 solid;width:100%;border-radius:10px;overflow: hidden;}
+.table_head{border-radius:10px 10px 0 0;overflow:hidden;width:100%;background:#0A61B9;box-sizing:border-box;padding-right:17px}
+.table_head th,.table_body th{height:40px;color:#fff;background: #0A61B9;}
+.table_body{width:100%;overflow-y:scroll;overflow-x:hidden;background:#fff}
+.table_body table{width:100%;margin-top:-40px;border-left:1px #0A61B9 solid}
+.table_body table td{height:30px;text-align:center;border-right:1px #0A61B9 solid;border-bottom:1px #0A61B9 solid;}
+.table_body table .right{text-align:right}
+.table th{height:40px;background: #0A61B9;color:#fff;font-weight:bold;text-align: center;}
+.table th,.table td{border-right:1px #0A61B9 solid;text-align:center;vertical-align:middle;border-bottom:1px #0A61B9 solid}
+.table td a{text-decoration:underline}
+.table td a:hover{color:#0A61B9}
+input[type=text],input[type=password]{border-radius:5px;background: #fff;box-sizing:border-box;border: 1px #ddd solid;line-height: 2.5em;padding:0 10px;transition: all 0.3s ease-in;-moz-transition: all 0.3s ease-in;-webkit-transition: all 0.3s ease-in;-ms-transition: all 0.3s ease-in;}
+input[type=button]{border-radius:5px;cursor:pointer;background: #0A61B9;color:#fff;line-height: 2.5em;outline: none;border: none;transition: all 0.3s ease-in;-moz-transition: all 0.3s ease-in;-webkit-transition: all 0.3s ease-in;-ms-transition: all 0.3s ease-in;}
+input[type=button]:hover{opacity: 0.8;filter: alpha(opacity=80);}
+input[type=text]:focus,input[type=password]:focus{border-color:#54b5ff;outline: none;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;line-height: 2em;}
+ul,li,ol,dl,dt,dd{list-style: none;}
+.clearfix:after{content:"";visibility: hidden;height:0;clear:both;display: block;}
+.clearfix{display: block;zoom: 1;}
+.block{border:1px #0A61B9 solid;border-radius:5px;overflow:hidden}
+
+header{width:98%;padding:1% 0;max-width: 1600px;}
+header .headerInner{background: #0e6ed1;background:linear-gradient(#0e6ed1,#2885e6,#0e6ed1);background:-webkit-linear-gradient(#0e6ed1,#2885e6,#0e6ed1);background:-moz-linear-gradient(#0e6ed1,#2885e6,#0e6ed1);background:-ms-linear-gradient(#0e6ed1,#2885e6,#0e6ed1);border:1px #0a61b9 solid;overflow:hidden;position:relative;height:60px;border-radius:10px;color:#fff}
+header .headerInner .logo{float:left;padding:0 10px;background:#fff;border-right:1px #0a61b9 solid;}
+header .headerInner .title{font-size:24px;line-height:60px;position:absolute;width:100%;left:0;top:0}
+header .headerInner .userName{position:absolute;top:0;right:35px;width:200px;border-left:1px #0a61b9 solid;height:60px;line-height: 30px;}
+header .headerInner #Quit{position:absolute;top:0;right:0;width:1em;padding:0 10px;border-left:1px #0a61b9 solid;line-height:30px;cursor:pointer;}
+header .headerInner #Quit:hover{background:rgba(255,255,255,0.2)}
+
+footer{margin-top:10px}
+
+.main{width:98%;overflow:hidden;max-width: 1600px;}
+.main nav{float:left;width:200px;box-sizing:border-box;overflow:hidden;background: #0e6ed1;border:1px #0a61b9 solid;height:460px;border-radius:10px;}
+.main nav ul li{cursor:pointer;border-bottom:1px #0a61b9 solid;line-height: 60px;color:#fff;font-size:16px;transition:all 0.3s ease-out}
+.main nav ul li.focus,.main nav ul li:hover{background:#fff;color:#0e6ed1}
+.main .contentBox{margin-left:200px;padding-left:1%;border-radius:10px;height:500px}
+.main .contentBox .content{border:1px #0a61b9 solid;border-radius:10px;background: #fff;height:100%;overflow: hidden;}
+.main .contentBox .content .tabs{border-bottom:1px #0A61B9 solid;}
+.main .contentBox .content .tabs #tabsList{overflow:hidden;}
+.main .contentBox .content .tabs #tabsList li{float:left;box-shadow: 0 0 5px 1px #0A61B9 inset;cursor:pointer;border-radius:8px 8px 0 0 ;line-height:30px;padding:0 10px;border-right:1px #0A61B9 solid;}
+.main .contentBox .content .tabs #tabsList li.focus{background: #0A61B9;color:#fff;box-shadow: 0 0 5px 1px #fff inset;}
+.main .contentBox .content .module{display: none;height:100%;}
+.main .contentBox .content .module .result{height:80%;overflow:hidden;}
+.main .contentBox .content .module .result .table_body{max-height:90%;}
+.main .contentBox .content #Enter{display: block;}
+
+.inner{padding:1%;height:100%;box-sizing: border-box;}
+
+#Enter{position:relative;overflow: hidden;}
+#Enter .enterInfo{overflow:hidden;height:40%;}
+#Enter .enterInfo .QRcode{float:left;width: 49%;height:100%;box-sizing: border-box;}
+#Enter .enterInfo .QRcode .number{position:relative;border-bottom:1px #0A61B9 solid;line-height: 40px;overflow: hidden;}
+#Enter .enterInfo .QRcode .number p{background:#0A61B9;color:#fff;float:left;width: 40%;border-right:1px #0A61B9 solid;box-sizing:border-box;}
+#Enter .enterInfo .QRcode .number input{border-radius:0;float:left;width:60%;box-sizing:border-box;height:40px;line-height:40px;border:none;}
+#Enter .enterInfo .QRcode .number input:focus{box-shadow: 0 0 5px 1px #ccc inset;}
+#Enter .enterInfo .QRcode .number span{position:absolute;width:25px;height:25px;right:10px;top:7px;}
+#Enter .enterInfo .QRcode .QRcodeContent textarea{outline:none;border:none;box-sizing:border-box;width:100%;height:100%;resize:none;padding:10px;font-size:14px;line-height:2em;}
+#Enter .enterInfo .infoList{float:right;height:100%;width:49%;border-bottom:none;box-sizing: border-box;display: table;}
+#Enter .enterInfo .infoList li{overflow:hidden;box-sizing: border-box;vertical-align: middle;display: table-row;}
+#Enter .enterInfo .infoList li:first{border-top:1px #0A61B9 solid}
+#Enter .enterInfo .infoList li div{position:relative;float:left;width:40%;box-sizing: border-box;height:100%;border-bottom:1px #0A61B9 solid;border-right:1px #0A61B9 solid;}
+#Enter .enterInfo .infoList li div p{position:absolute;width: 100%;line-height: 1em;font-size:14px;top:50%;margin-top:-7px;left:0;}
+#Enter .enterInfo .infoList li input{float:left;width:60%;height:100%;box-sizing: border-box;border:none;border-radius:0;border-bottom:1px #0A61B9 solid;}
+#Enter .btn{margin:1% auto}
+#Enter .btn .hand{width: 50%;float:right} 
+#Enter .btn .hand input{width:60%;height:40px;line-height:40px}
+#Enter .infoTable{height:40%;}
+#Enter .infoTable .table_body{max-height:85%;}
+#Enter #handInner{position:absolute;background:#fff;box-sizing:border-box;padding:1%;right:-100%;top:0;width:100%;height:100%;transition:all 0.5s ease-out;-moz-transition:all 0.5s ease-out;-webkit-transition:all 0.5s ease-out;-ms-transition:all 0.5s ease-out;}
+#Enter #handInner ul li{overflow:hidden;float: left;width:48%;height:40px;margin:1%;border:1px #0A61B9 solid;box-sizing: border-box;border-radius:5px;}
+#Enter #handInner ul #handoaid{position:relative;}
+#Enter #handInner ul #handoaid span{position:absolute;width:25px;height:25px;right:10px;top:7px;}
+#Enter #handInner ul li p{float:left;width: 30%;background: #0A61B9;color:#fff;line-height:40px;}
+#Enter #handInner ul li input{border-radius:0;width:70%;border:none;height:40px;line-height: 40px;outline: none;}
+#Enter #handInner ul li input[type=number]{box-sizing:border-box;padding-left:10px}
+#Enter #handInner ul li input.form-control{width: 100%;border-radius:0}
+#Enter #handInner section {width:48%;margin:1% auto;text-align: left;margin-bottom:2%;}
+#Enter #handInner section p{background: #0A61B9;color:#fff;font-size:16px;padding:0 15px;line-height: 30px;border-radius:5px 5px 0 0}
+#Enter #handInner section textarea{width:100%;font-size:16px;line-height:24px;overflow:scroll;height:144px;border-radius:0 0 5px 5px;resize:none;padding:10px;box-sizing:border-box;border: 1px #0A61B9 solid;}
+#Enter #handInner section div{overflow: hidden;width:280px}
+#Enter #handInner section div input{width:130px;background: green;float:left;}
+#Enter #handInner section div #HandSubBtn{background: green;}
+#Enter #handInner section div #HandCancel{background: gray;margin-left:20px}
+#Enter #handInner .table_body{max-height:80%;}
+
+
+ .search{margin-bottom:2%;}
+ .search ul{float:left;width:75%;}
+ .search ul li{float:left;overflow: hidden;height:40px;border:1px #0A61B9 solid;width:24%;margin-right:1%;box-sizing: border-box;}
+ .search ul li p{float:left;width:40%;box-sizing:border-box;border-right:1px #0A61B9 solid;line-height: 40px;}
+ .search ul li input,.search ul li select{float:left;width: 60%;height:40px;border:none;}
+ .search ul li select{outline:none;box-sizing:border-box;padding-left:20%}
+ .search input[type=button]{float:left;width:10%;height:40px;}
+
+#Gather .search ul{width:20%;margin-right:1%}
+#Gather .search ul li{width:100%}
+#Gather table td{height:30px}
+#Gather table a:hover{text-decoration:underline;color:#0A61B9}
+
+#Manage #AdminUser,#Manage #NormalUser{height:100%}
+#Manage #AdminUser .edit{margin-bottom:1%}
+#Manage #AdminUser .edit form{float:left;width: 60%;}
+#Manage #AdminUser .edit .editList li{float:left;border-radius:5px;line-height: 40px;width:32%;overflow:hidden;margin-right:1%;border:1px #0A61B9 solid;height:40px;box-sizing: border-box;}
+#Manage #AdminUser .edit .editList li p{float:left;background: #0A61B9;color:#fff;width:40%;box-sizing: border-box;border-right:1px #0A61B9 solid;}
+#Manage #AdminUser .edit .editList li input{border-radius:0;border:none;float:left;width:60%;height:40px;}
+#Manage #AdminUser .edit .editBtn{float:right;width:40%}
+#Manage #AdminUser .edit .editBtn li{float:left;width:32%;margin-left:1%;}
+#Manage #AdminUser .edit .editBtn li input{width:100%;box-sizing: border-box;line-height: 40px;height:40px;}
+#Manage #AdminUser .edit .editBtn li input[name=add]{background: green;}
+#Manage #AdminUser .edit .editBtn li input[name=change]{background: #0A61B9;}
+#Manage #AdminUser .edit .editBtn li input[name=del]{background: gray;}
+#Manage #AdminUser table td{height:30px;}
+#Manage #NormalUser ul{width: 400px;margin-top:40px}
+#Manage #NormalUser ul li{overflow:hidden;line-height:40px;height:40px;border:1px #0A61B9 solid;border-radius:5px;margin-bottom:10px}
+#Manage #NormalUser ul li p{float:left;background: #0A61B9;color:#fff;width:40%;}
+#Manage #NormalUser ul li input{float:left;border:none;width:60%;line-height: 40px;height:40px;}
+#Manage #NormalUser .btn{width: 400px;text-align: right;margin-top:30px}
+#Manage #NormalUser .btn input{width: 100px;background: green;height:40px;line-height: 40px;}
+
+#black{display:none;position:fixed;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,0.6);z-index:10}
+#invoiceByOA {/* opacity:0;filter:alpha(opacity=0); */display:none;position:fixed;top:50%;left:50%;margin-left:-500px;z-index:12;width:1000px;}
+#invoiceByOA .table_tbody{max-height:600px}
+
+.datetimepicker-days td{text-align: center;}
+.datetimepicker-days td:hover{background: #0A61B9;color:#fff;cursor:pointer;}
+.datetimepicker-years th,.datetimepicker-years tfoot td{text-align:left}

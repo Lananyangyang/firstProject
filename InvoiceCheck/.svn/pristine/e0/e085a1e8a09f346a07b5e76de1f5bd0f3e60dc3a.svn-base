@@ -1,0 +1,55 @@
+*{margin:0 auto;padding:0}
+body{min-width:1000px;font-size:14px;font-family: "arial, helvetica, sans-serif";line-height: 1.5em;text-align: center;background: linear-gradient(#1888de,#54b5ff);background: -moz-linear-gradient(#1888de,#54b5ff);background: -webkit-linear-gradient(#1888de,#54b5ff);background: -ms-linear-gradient(#1888de,#54b5ff);}
+img{display: block;}
+a{color:inherit;text-decoration:none;cursor:pointer;}
+input[type=text],input[type=password]{border-radius:3px;background: #fff;box-sizing:border-box;border: 1px #ddd solid;line-height: 2.5em;padding:0 10px;transition: all 0.3s ease-in;-moz-transition: all 0.3s ease-in;-webkit-transition: all 0.3s ease-in;-ms-transition: all 0.3s ease-in;}
+input[type=button]{border-radius:3px;cursor:pointer;background: #0A61B9;color:#fff;line-height: 2.5em;outline: none;border: none;transition: all 0.3s ease-in;-moz-transition: all 0.3s ease-in;-webkit-transition: all 0.3s ease-in;-ms-transition: all 0.3s ease-in;}
+input[type=button]:hover{opacity: 0.8;filter: alpha(opacity=80);}
+input[type=text]:focus,input[type=password]:focus{border-color:#54b5ff;outline: none;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;line-height: 2em;}
+ul,li,ol,dl,dt,dd{list-style: none;}
+.clearfix:after{content:"";visibility: hidden;height:0;clear:both;display: block;}
+.clearfix{display: block;zoom: 1;}
+.block{border:1px #0A61B9 solid;border-radius:5px;overflow:hidden}
+
+header{width:98%;padding:1% 0;max-width: 1600px;}
+header .headerInner{background: #0e6ed1;border:1px #0a61b9 solid;overflow:hidden;position:relative;height:60px;border-radius:10px;color:#fff}
+header .headerInner .logo{float:left;width:200px;border-right:1px #0a61b9 solid;}
+header .headerInner .title{font-size:24px;line-height:60px;position:absolute;width:100%;left:0;top:0}
+header .headerInner .userName{float:right;width:200px;border-left:1px #0a61b9 solid;height:60px;line-height: 30px;}
+
+
+.main{width:98%;overflow:hidden;max-width: 1600px;}
+.main nav{float:left;width:200px;box-sizing:border-box;overflow:hidden;background: #0e6ed1;border:1px #0a61b9 solid;height:600px;border-radius:10px;}
+.main nav ul li{cursor:pointer;border-bottom:1px #0a61b9 solid;line-height: 60px;color:#fff;font-size:16px;transition:all 0.3s ease-out}
+.main nav ul li.focus,.main nav ul li:hover{background:#fff;color:#0e6ed1}
+.main .contentBox{margin-left:200px;padding-left:1%;height:600px;border-radius:10px;}
+.main .contentBox .content{border:1px #0a61b9 solid;border-radius:10px;background: #fff;height:100%;overflow: hidden;}
+.main .contentBox .content .tabs{border-bottom:1px #0A61B9 solid;}
+.main .contentBox .content .tabs #tabsList{overflow:hidden;}
+.main .contentBox .content .tabs #tabsList li{float:left;box-shadow: 0 0 5px 1px #0A61B9 inset;cursor:pointer;border-radius:8px 8px 0 0 ;line-height:30px;padding:0 10px;border-right:1px #0A61B9 solid;}
+.main .contentBox .content .tabs #tabsList li.focus{background: #0A61B9;color:#fff;box-shadow: 0 0 5px 1px #fff inset;}
+.main .contentBox .content .module{display: none;height:100%;}
+.main .contentBox .content #Enter{display: block;}
+
+#Module{height:100%;}
+.inner{padding:10px;height:100%;box-sizing: border-box;}
+
+#Enter .enterInfo{overflow:hidden;height:40%;}
+#Enter .enterInfo .QRcode{float:left;width: 49%;height:100%;box-sizing: border-box;}
+#Enter .enterInfo .QRcode .number{border-bottom:1px #0A61B9 solid;line-height: 40px;overflow: hidden;}
+#Enter .enterInfo .QRcode .number p{background:#0A61B9;color:#fff;float:left;width: 40%;border-right:1px #0A61B9 solid;box-sizing:border-box;}
+#Enter .enterInfo .QRcode .number input{float:left;width:60%;box-sizing:border-box;height:40px;line-height:40px;border:none;}
+#Enter .enterInfo .QRcode .number input:focus{box-shadow: 0 0 5px 1px #ccc inset;}
+#Enter .enterInfo .QRcode .QRcodeContent{}
+#Enter .enterInfo .infoList{float:right;height:100%;width:49%;border-bottom:none;box-sizing: border-box;}
+#Enter .enterInfo .infoList li{overflow:hidden;box-sizing: border-box;vertical-align: middle;height: 20%;border-bottom:1px #0A61B9 solid;}
+#Enter .enterInfo .infoList li:first{border-top:1px #0A61B9 solid}
+#Enter .enterInfo .infoList li p{float:left;width:40%;height:100%;line-height:54px;border-right:1px #0A61B9 solid;box-sizing: border-box;}
+#Enter .enterInfo .infoList li span{float:left;width:60%;height:100%;box-sizing: border-box;}
+#Enter .btn{margin:1% auto}
+#Enter .btn div{width: 50%;float:left} 
+#Enter .btn div input{width:90%;height:50px;}
+#Enter .infoTable{height:40%;}
+
+
